@@ -1,5 +1,5 @@
 {
-	"name": "vectorly",
+	"name": "image-vectorizer",
 	"version": "3.0.0",
 	"description": "Potrace in Javascript, for NodeJS and Browser",
 	"main": "lib/index.js",
@@ -9,7 +9,7 @@
 	},
 	"repository": {
 		"type": "git",
-		"url": "git+https://github.com/syblock/vectorly.git"
+		"url": "git+https://github.com/syblock/image-vectorizer.git"
 	},
 	"keywords": [
 		"potrace",
@@ -22,9 +22,9 @@
 	"author": "mattmc",
 	"license": "GPL-2.0",
 	"bugs": {
-		"url": "https://github.com/syblock/vectorly/issues"
+		"url": "https://github.com/syblock/image-vectorizer/issues"
 	},
-	"homepage": "https://github.com/syblock/vectorly#readme",
+	"homepage": "https://github.com/syblock/image-vectorizer#readme",
 	"dependencies": {
 		"jimp": "^0.14.0"
 	},

@@ -1,11 +1,11 @@
-# Vectorly
+# Image Vectorizer
 A NodeJS and Browser compatible fork of [Node Potrace][node-potrace-by-tooolbox] with some additions, which is in turn a port of [the original Potrace][potrace] — a tool for tracing bitmaps.
 
 ## Example and demo
 
 | **Original image**        | **Potrace output**           | **Posterized output**                   |
 |---------------------------|------------------------------|-----------------------------------------|
-| ![](test/sources/yao.jpg) | ![](https://cdn.jsdelivr.net/gh/syblock/vectorly@9ee822d/test/example-output.svg) | ![](https://cdn.jsdelivr.net/gh/syblock/vectorly@9ee822d/test/example-output-posterized.svg) |
+| ![](test/sources/yao.jpg) | ![](https://cdn.jsdelivr.net/gh/syblock/image-vectorizer@9ee822d/test/example-output.svg) | ![](https://cdn.jsdelivr.net/gh/syblock/image-vectorizer@9ee822d/test/example-output-posterized.svg) |
 
 (Example image inherited from [online demo of the browser version][potrace-js-demo])
 
@@ -14,15 +14,15 @@ A NodeJS and Browser compatible fork of [Node Potrace][node-potrace-by-tooolbox]
 Install
 
 ```sh
-npm install vectorly
+npm install image-vectorizer
 ```
 
 Basic usage
 
 ```js
-import Vectorly from 'vectorly'
+import ImageVectorizer from 'image-vectorizer'
 
-Vectorly.trace('./path/to/image.png', function (err, svg) {
+ImageVectorizer.trace('./path/to/image.png', function (err, svg) {
   if (err) throw err
   console.log(svg)
 })
@@ -37,7 +37,7 @@ var params = {
   threshold: 120
 }
 
-Vectorly.trace('./path/to/image.png', params, function (err, svg) {
+ImageVectorizer.trace('./path/to/image.png', params, function (err, svg) {
   /*...*/
 })
 ```
@@ -45,13 +45,13 @@ Vectorly.trace('./path/to/image.png', params, function (err, svg) {
 If you want to run Potrace algorithm multiple times on the same image with different threshold setting and merge results together in a single file - `posterize` method does exactly that.
 
 ```js
-Vectorly.posterize('./path/to/image.png', { threshold: 180, steps: 4 }, function (err, svg) {
+ImageVectorizer.posterize('./path/to/image.png', { threshold: 180, steps: 4 }, function (err, svg) {
   /*...*/
 })
 
 // or if you know exactly where you want to break it on different levels
 
-Vectorly.posterize('./path/to/image.png', { steps: [40, 85, 135, 180] }, function (err, svg) {
+ImageVectorizer.posterize('./path/to/image.png', { steps: [40, 85, 135, 180] }, function (err, svg) {
   /*...*/
 })
 ```
@@ -63,11 +63,11 @@ Both `trace` and `posterize` methods return instances of `Potrace` and `Posteriz
 You can also instantiate these classes directly:
 
 ```js
-import Vectorly from 'vectorly'
+import ImageVectorizer from 'image-vectorizer'
 
 // Tracing
 
-const trace = new Vectorly.Potrace()
+const trace = new ImageVectorizer.Potrace()
 
 // You can also pass configuration object to the constructor
 trace.setParameters({
@@ -85,7 +85,7 @@ trace.loadImage('path/to/image.png', function (err) {
 
 // Posterization
 
-const posterizer = new Vectorly.Posterize()
+const posterizer = new ImageVectorizer.Posterize()
 
 posterizer.loadImage('path/to/image.png', function (err) {
   if (err) throw err
@@ -95,7 +95,7 @@ posterizer.loadImage('path/to/image.png', function (err) {
     background: '#222',
     steps: 3,
     threshold: 200,
-    fillStrategy: Vectorly.Posterize.FILL_MEAN
+    fillStrategy: ImageVectorizer.Posterize.FILL_MEAN
   })
   
   posterizer.getSVG()
@@ -107,7 +107,7 @@ posterizer.loadImage('path/to/image.png', function (err) {
 Callback function provided to `loadImage` methods will be executed in context of the `Potrace`/`Posterizer` instance, so if it doesn't go against your code style - you can just do
 
 ```js
-new Vectorly.Potrace()
+new ImageVectorizer.Potrace()
   .loadImage('path/to/image.bmp', function() {
     if (err) throw err
     this.getSymbol('foo')
