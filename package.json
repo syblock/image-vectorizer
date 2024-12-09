@@ -1,6 +1,6 @@
 {
 	"name": "image-vectorizer",
-	"version": "3.0.1",
+	"version": "3.0.2",
 	"description": "Potrace in Javascript, for NodeJS and Browser",
 	"main": "lib/index.js",
 	"type": "module",
