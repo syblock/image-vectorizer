@@ -76,9 +76,19 @@ export function posterize(
 	cb: (error: Error | null, svg: string, posterizer: Posterizer) => void
 ): void
 
+export default {
+	trace,
+	posterize,
+	Potrace,
+	Posterizer
+}
+
 export class Posterizer {
 	constructor(options?: PosterizerOptions)
-	loadImage(image: string | Buffer | Jimp | ImageData, callback: (posterizer: Posterizer, error: Error | null) => void): void
+	loadImage(
+		image: string | Buffer | Jimp | ImageData,
+		callback: (posterizer: Posterizer, error: Error | null) => void
+	): void
 	setParameters(params: PotraceOptions): void
 	getSVG(): string
 	getSymbol(id: string): string
@@ -86,7 +96,10 @@ export class Posterizer {
 
 export class Potrace {
 	constructor(options?: PotraceOptions)
-	loadImage(image: string | Buffer | Jimp | ImageData, callback: (potrace: Potrace, error: Error | null) => void): void
+	loadImage(
+		image: string | Buffer | Jimp | ImageData,
+		callback: (potrace: Potrace, error: Error | null) => void
+	): void
 	setParameters(params: PotraceOptions): void
 	getSVG(): string
 	getSymbol(id: string): string
