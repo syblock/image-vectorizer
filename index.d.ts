@@ -76,13 +76,6 @@ export function posterize(
 	cb: (error: Error | null, svg: string, posterizer: Posterizer) => void
 ): void
 
-export default {
-	trace,
-	posterize,
-	Potrace,
-	Posterizer
-}
-
 export class Posterizer {
 	constructor(options?: PosterizerOptions)
 	loadImage(
@@ -104,4 +97,12 @@ export class Potrace {
 	getSVG(): string
 	getSymbol(id: string): string
 	getPathTag(fillColor: string, scale: number): string
+}
+
+// @ts-ignore
+export default {
+	trace,
+	posterize,
+	Potrace,
+	Posterizer
 }

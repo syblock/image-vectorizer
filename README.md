@@ -5,9 +5,11 @@ A NodeJS and Browser compatible fork of [Node Potrace][node-potrace-by-tooolbox]
 
 | **Original image**        | **Potrace output**           | **Posterized output**                   |
 |---------------------------|------------------------------|-----------------------------------------|
-| ![](test/sources/yao.jpg) | ![](https://cdn.jsdelivr.net/gh/syblock/image-vectorizer@9ee822d/test/example-output.svg) | ![](https://cdn.jsdelivr.net/gh/syblock/image-vectorizer@9ee822d/test/example-output-posterized.svg) |
+| ![](https://cdn.jsdelivr.net/gh/syblock/image-vectorizer/test/sources/yao.jpg) | ![](https://cdn.jsdelivr.net/gh/syblock/image-vectorizer/test/example-output.svg) | ![](https://cdn.jsdelivr.net/gh/syblock/image-vectorizer/test/example-output-posterized.svg) |
 
 (Example image inherited from [online demo of the browser version][potrace-js-demo])
+
+[**Demo**](https://tools.syblock.dev)
 
 ## Usage
 

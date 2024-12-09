@@ -12,6 +12,7 @@
 		"url": "git+https://github.com/syblock/image-vectorizer.git"
 	},
 	"keywords": [
+		"vector",
 		"potrace",
 		"trace",
 		"tracing",
@@ -19,7 +20,7 @@
 		"bitmap",
 		"posterization"
 	],
-	"author": "mattmc",
+	"author": "syblock",
 	"license": "GPL-2.0",
 	"bugs": {
 		"url": "https://github.com/syblock/image-vectorizer/issues"
