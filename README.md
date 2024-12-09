@@ -1,13 +1,11 @@
-# node-potrace
-A NodeJS-compatible fork of [Potrace in JavaScript][potrace-by-kilobtye] with some additions, which is in turn a port of [the original Potrace][potrace] — a tool for tracing bitmaps.
-
-![Node.js CI](https://github.com/tooolbox/node-potrace/workflows/Node.js%20CI/badge.svg)
+# Vectorly
+A NodeJS and Browser compatible fork of [Node Potrace][node-potrace-by-tooolbox] with some additions, which is in turn a port of [the original Potrace][potrace] — a tool for tracing bitmaps.
 
 ## Example and demo
 
 | **Original image**        | **Potrace output**           | **Posterized output**                   |
 |---------------------------|------------------------------|-----------------------------------------|
-| ![](test/sources/yao.jpg) | ![](https://cdn.rawgit.com/tooolbox/node-potrace/9ee822d/test/example-output.svg) | ![](https://cdn.rawgit.com/tooolbox/node-potrace/9ee822d/test/example-output-posterized.svg) |
+| ![](test/sources/yao.jpg) | ![](https://cdn.jsdelivr.net/gh/syblock/vectorly@9ee822d/test/example-output.svg) | ![](https://cdn.jsdelivr.net/gh/syblock/vectorly@9ee822d/test/example-output-posterized.svg) |
 
 (Example image inherited from [online demo of the browser version][potrace-js-demo])
 
@@ -16,19 +14,18 @@ A NodeJS-compatible fork of [Potrace in JavaScript][potrace-by-kilobtye] with so
 Install
 
 ```sh
-npm install potrace
+npm install vectorly
 ```
 
 Basic usage
 
 ```js
-var potrace = require('potrace'),
-    fs = require('fs');
+import Vectorly from 'vectorly'
 
-potrace.trace('./path/to/image.png', function(err, svg) {
-  if (err) throw err;
-  fs.writeFileSync('./output.svg', svg);
-});
+Vectorly.trace('./path/to/image.png', function (err, svg) {
+  if (err) throw err
+  console.log(svg)
+})
 ```
 
 You can also provide a configuration object as a second argument.
@@ -38,25 +35,25 @@ var params = {
   background: '#49ffd2',
   color: 'blue',
   threshold: 120
-};
+}
 
-potrace.trace('./path/to/image.png', params, function(err, svg) {
+Vectorly.trace('./path/to/image.png', params, function (err, svg) {
   /*...*/
-});
+})
 ```
 
 If you want to run Potrace algorithm multiple times on the same image with different threshold setting and merge results together in a single file - `posterize` method does exactly that.
 
 ```js
-potrace.posterize('./path/to/image.png', { threshold: 180, steps: 4 }, function(err, svg) {
+Vectorly.posterize('./path/to/image.png', { threshold: 180, steps: 4 }, function (err, svg) {
   /*...*/
-});
+})
 
 // or if you know exactly where you want to break it on different levels
 
-potrace.posterize('./path/to/image.png', { steps: [40, 85, 135, 180] }, function(err, svg) {
+Vectorly.posterize('./path/to/image.png', { steps: [40, 85, 135, 180] }, function (err, svg) {
   /*...*/
-});
+})
 ```
 
 ### Advanced usage and configuration
@@ -66,55 +63,55 @@ Both `trace` and `posterize` methods return instances of `Potrace` and `Posteriz
 You can also instantiate these classes directly:
 
 ```js
-var potrace = require('potrace');
+import Vectorly from 'vectorly'
 
 // Tracing
 
-var trace = new potrace.Potrace();
+const trace = new Vectorly.Potrace()
 
 // You can also pass configuration object to the constructor
 trace.setParameters({
   threshold: 128,
   color: '#880000'
-});
+})
 
-trace.loadImage('path/to/image.png', function(err) {
-  if (err) throw err;
+trace.loadImage('path/to/image.png', function (err) {
+  if (err) throw err
 
-  trace.getSVG(); // returns SVG document contents
-  trace.getPathTag(); // will return just <path> tag
-  trace.getSymbol('traced-image'); // will return <symbol> tag with given ID
-});
+  trace.getSVG() // returns SVG document contents
+  trace.getPathTag() // will return just <path> tag
+  trace.getSymbol('traced-image') // will return <symbol> tag with given ID
+})
 
 // Posterization
 
-var posterizer = new potrace.Posterize();
+const posterizer = new Vectorly.Posterize()
 
-posterizer.loadImage('path/to/image.png', function(err) {
-  if (err) throw err;
+posterizer.loadImage('path/to/image.png', function (err) {
+  if (err) throw err
   
   posterizer.setParameter({
     color: '#ccc',
     background: '#222',
     steps: 3,
     threshold: 200,
-    fillStrategy: potrace.Posterize.FILL_MEAN
-  });
+    fillStrategy: Vectorly.Posterize.FILL_MEAN
+  })
   
-  posterizer.getSVG();
+  posterizer.getSVG()
   // or
-  posterizer.getSymbol('posterized-image');
-});
+  posterizer.getSymbol('posterized-image')
+})
 ```
 
 Callback function provided to `loadImage` methods will be executed in context of the `Potrace`/`Posterizer` instance, so if it doesn't go against your code style - you can just do
 
 ```js
-new potrace.Potrace()
+new Vectorly.Potrace()
   .loadImage('path/to/image.bmp', function() {
-    if (err) throw err;
-    this.getSymbol('foo');
-  });
+    if (err) throw err
+    this.getSymbol('foo')
+  })
 ```
 
 [Jimp module][jimp] is used on the back end, so first argument accepted by `loadImage` method could be anything Jimp can read: a `Buffer`, local path or a url string. Supported formats are: PNG, JPEG or BMP. It also could be a Jimp instance (provided bitmap is not modified)
@@ -171,6 +168,7 @@ Configuration object is extended with following properties:
 
 - Peter Selinger for [original Potrace tool and algorithm][potrace]
 - @kilobtye for original [javascript port][potrace-by-kilobtye]
+- @tooolbox for [node port][node-potrace-by-tooolbox]
 
 ## License
 
@@ -180,5 +178,6 @@ The GNU General Public License version 2 (GPLv2). Please see [License File](LICE
 [potrace-algorithm]: http://potrace.sourceforge.net/potrace.pdf
 [multilevel-thresholding]: http://www.iis.sinica.edu.tw/page/jise/2001/200109_01.pdf
 [potrace-by-kilobtye]: https://github.com/kilobtye/potrace
+[node-potrace-by-tooolbox]: https://github.com/tooolbox/node-potrace
 [potrace-js-demo]: http://kilobtye.github.io/potrace/
 [jimp]: https://github.com/oliver-moran/jimp
